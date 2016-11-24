@@ -23,10 +23,6 @@ public class Squad implements Cloneable {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public ArrayList<Warrior> getSquad() {
         return squad;
     }
