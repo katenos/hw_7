@@ -9,13 +9,9 @@ package hw_4_2;
  *
  * @author kate_
  */
-public class Hw_4_2 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
+public interface Warrior {
+    int attack();
+    void takeDamage(int damage);
+    boolean isAlive();
+    void setSquadName(String name);     
 }
