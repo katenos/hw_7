@@ -10,8 +10,12 @@ package hw_4_2;
  * @author kate_
  */
 public interface Warrior {
+
     int attack();
+
     void takeDamage(int damage);
+
     boolean isAlive();
-    void setSquadName(String name);     
+
+    void setSquadName(String name);
 }

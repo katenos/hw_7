@@ -16,7 +16,7 @@ public class Viking implements Warrior {
     protected int health;
     protected int damage;
     protected String squadName;
-    protected String warriorName;   
+    protected String warriorName;
 
     public Viking() {
         Random rand = new Random();
@@ -24,7 +24,7 @@ public class Viking implements Warrior {
         this.damage = 30;
         this.warriorName = "Viking " + (rand.nextInt(20) + 1);
     }
-    
+
     @Override
     public int attack() {
         return damage;
@@ -54,6 +54,6 @@ public class Viking implements Warrior {
 
     @Override
     public Viking clone() throws CloneNotSupportedException {
-         return (Viking) super.clone();
+        return (Viking) super.clone();
     }
 }

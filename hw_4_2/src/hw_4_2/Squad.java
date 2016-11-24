@@ -59,10 +59,10 @@ public class Squad implements Cloneable {
     }
 
     @Override
-    public Squad clone() throws CloneNotSupportedException {                  
-        Squad clone = (Squad) super.clone();             
+    public Squad clone() throws CloneNotSupportedException {
+        Squad clone = (Squad) super.clone();
+        //тут можно было бы создать новый ArrayList<Warrior> в который я бы добавляла warrior.clone, но у меня не получилось
         clone.squad = (ArrayList<Warrior>) squad.clone();
         return clone;
     }
 }
-

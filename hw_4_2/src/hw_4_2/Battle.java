@@ -34,7 +34,7 @@ public class Battle {
         for (int i = 0; i < ot2.getSquad().size(); i++) {
             System.out.println(ot2.getSquad().get(i).toString());
         }
-        
+
         System.out.println("\nСражение началось!");
         System.out.println(d.getFormattedStartDate());
         String nameWinner = battle(ot1, ot2, d);

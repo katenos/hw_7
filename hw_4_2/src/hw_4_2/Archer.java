@@ -25,7 +25,7 @@ public class Archer implements Warrior, Cloneable {
         this.damage = 40;
         this.warriorName = "Archer " + (rand.nextInt(20) + 1);
     }
-    
+
     @Override
     public int attack() {
         return damage;
@@ -55,8 +55,8 @@ public class Archer implements Warrior, Cloneable {
 
     @Override
     public Archer clone() throws CloneNotSupportedException {
-        Archer clone = (Archer) super.clone();        
-         return clone;  
+        Archer clone = (Archer) super.clone();
+        return clone;
     }
 
 }
