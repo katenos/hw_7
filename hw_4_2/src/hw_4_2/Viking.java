@@ -55,17 +55,5 @@ public class Viking implements Warrior {
     @Override
     public Viking clone() throws CloneNotSupportedException {
          return (Viking) super.clone();
-//        Viking vk=new Viking();
-//        vk.damage=this.damage;
-//        vk.health=this.health;
-//        vk.squadName=this.squadName;
-//        vk.warriorName=this.warriorName;
-//        return vk;
-//        Viking clone = (Viking) super.clone();
-//        clone.health = health;
-//        clone.damage = damage;
-//        clone.squadName = squadName;
-//        clone.warriorName = warriorName;
-//        return clone;
     }
 }

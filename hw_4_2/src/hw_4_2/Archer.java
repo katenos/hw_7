@@ -55,19 +55,8 @@ public class Archer implements Warrior, Cloneable {
 
     @Override
     public Archer clone() throws CloneNotSupportedException {
-         return (Archer) super.clone();
-//          Archer ar=new Archer();
-//        ar.damage=this.damage;
-//        ar.health=this.health;
-//        ar.squadName=this.squadName;
-//        ar.warriorName=this.warriorName;
-//        return ar;
-//        Archer clone = (Archer) super.clone();
-//        clone.health = health;
-//        clone.damage = damage;
-//        clone.squadName = squadName;
-//        clone.warriorName = warriorName;
-//        return clone;
+        Archer clone = (Archer) super.clone();        
+         return clone;  
     }
 
 }
