@@ -5,8 +5,6 @@
  */
 package hw_4_2;
 
-import java.util.Random;
-
 /**
  *
  * @author kate_
@@ -19,11 +17,16 @@ public class Archer implements Warrior, Cloneable {
     protected String warriorName;
 //    private Random rand = new Random();
 
-    public Archer() {
-        Random rand = new Random();
+    public Archer(String name) {
         this.health = 70;
         this.damage = 40;
-        this.warriorName = "Archer " + (rand.nextInt(20) + 1);
+        this.warriorName = name;
+    }
+
+    public Archer() {
+        this.health = 70;
+        this.damage = 40;
+        this.warriorName = "Archer";
     }
 
     @Override
@@ -54,9 +57,18 @@ public class Archer implements Warrior, Cloneable {
     }
 
     @Override
+    public String getTypeWarrior() {
+        return "Archer";
+    }
+
+    @Override
     public Archer clone() throws CloneNotSupportedException {
         Archer clone = (Archer) super.clone();
         return clone;
     }
 
+    @Override
+    public void setName(String name) {
+        this.warriorName = name;
+    }
 }

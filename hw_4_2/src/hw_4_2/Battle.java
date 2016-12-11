@@ -5,6 +5,9 @@
  */
 package hw_4_2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author kate_
@@ -13,33 +16,39 @@ public class Battle {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Exception
      */
-    public static void main(String[] args) {
-        DateHelper d = new DateHelper();
-        Squad ot1 = new Squad("1-й отряд");
-        Squad ot2 = new Squad("2-й отряд");
-        ot1.addWarrior(new Archer());
-        ot1.addWarrior(new Archer());
-        ot1.addWarrior(new Viking());
-        ot1.addWarrior(new Viking());
-        ot2.addWarrior(new Archer());
-        ot2.addWarrior(new Archer());
-        ot2.addWarrior(new Viking());
+    public static void main(String[] args) throws Exception {
 
-        System.out.println("Список бойцов");
-        for (int i = 0; i < ot1.getSquad().size(); i++) {
-            System.out.println(ot1.getSquad().get(i).toString());
-        }
-        System.out.println("");
-        for (int i = 0; i < ot2.getSquad().size(); i++) {
-            System.out.println(ot2.getSquad().get(i).toString());
-        }
-
-        System.out.println("\nСражение началось!");
-        System.out.println(d.getFormattedStartDate());
-        String nameWinner = battle(ot1, ot2, d);
-        System.out.println("\nПобедил " + nameWinner);
-        System.out.println("Общее время поединка " + d.getFormattedDiff());
+        List<Warrior> typesWarrior = new ArrayList<Warrior>();
+        typesWarrior.add(new Archer());
+        typesWarrior.add(new Viking());
+        new MainFrame(typesWarrior).setVisible(true);
+//        DateHelper d = new DateHelper();
+//        Squad ot1 = new Squad("1-й отряд");
+//        Squad ot2 = new Squad("2-й отряд");
+//        ot1.addWarrior(new Archer());
+//        ot1.addWarrior(new Archer());
+//        ot1.addWarrior(new Viking());
+//        ot1.addWarrior(new Viking());
+//        ot2.addWarrior(new Archer());
+//        ot2.addWarrior(new Archer());
+//        ot2.addWarrior(new Viking());
+//
+//        System.out.println("Список бойцов");
+//        for (int i = 0; i < ot1.getSquad().size(); i++) {
+//            System.out.println(ot1.getSquad().get(i).toString());
+//        }
+//        System.out.println("");
+//        for (int i = 0; i < ot2.getSquad().size(); i++) {
+//            System.out.println(ot2.getSquad().get(i).toString());
+//        }
+//
+//        System.out.println("\nСражение началось!");
+//        System.out.println(d.getFormattedStartDate());
+//        String nameWinner = battle(ot1, ot2, d);
+//        System.out.println("\nПобедил " + nameWinner);
+//        System.out.println("Общее время поединка " + d.getFormattedDiff());
     }
 
     public static String battle(Squad ot1, Squad ot2, DateHelper d) {

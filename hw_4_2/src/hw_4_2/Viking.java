@@ -5,24 +5,28 @@
  */
 package hw_4_2;
 
-import java.util.Random;
 
 /**
  *
  * @author kate_
  */
-public class Viking implements Warrior {
+public class Viking implements Warrior, Cloneable {
 
     protected int health;
     protected int damage;
     protected String squadName;
     protected String warriorName;
 
-    public Viking() {
-        Random rand = new Random();
+    public Viking(String name) {        
         this.health = 100;
         this.damage = 30;
-        this.warriorName = "Viking " + (rand.nextInt(20) + 1);
+        this.warriorName = name;
+    }
+    
+    public Viking() {        
+        this.health = 100;
+        this.damage = 30;
+        this.warriorName = "Viking";
     }
 
     @Override
@@ -53,7 +57,17 @@ public class Viking implements Warrior {
     }
 
     @Override
-    public Viking clone() throws CloneNotSupportedException {
+    public Viking clone() throws CloneNotSupportedException {       
         return (Viking) super.clone();
+    }
+
+    @Override
+    public String getTypeWarrior() {
+        return "Viking";
+    }
+    
+    @Override
+    public void setName(String name) {
+        this.warriorName = name;
     }
 }

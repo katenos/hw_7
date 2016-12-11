@@ -18,4 +18,10 @@ public interface Warrior {
     boolean isAlive();
 
     void setSquadName(String name);
+    
+    void setName(String name);
+    
+    String getTypeWarrior();
+    
+    Warrior clone() throws CloneNotSupportedException;
 }

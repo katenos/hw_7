@@ -48,6 +48,14 @@ public class Squad implements Cloneable {
         }
         return false;
     }
+    
+    public void rename(String newName){
+        this.name=newName;                
+    }
+    
+    public void changeSquadNameOfWarrior(){
+        squad.forEach(warrior->warrior.setSquadName(name));
+    }
 
     @Override
     public String toString() {
