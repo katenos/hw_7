@@ -12,14 +12,14 @@ import java.util.List;
  *
  * @author kate_
  */
-public class Battle {
+public class Battle { //в этом классе предполагалось описать сражение
 
     /**
      * @param args the command line arguments
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
-        List<Warrior> typesWarrior = new ArrayList<Warrior>();
+        List<Warrior> typesWarrior = new ArrayList<Warrior>(); //этот список нужно вынести куда-нибудь в другое место и сделать константой. в главном методе оставить только отображение окна.
         typesWarrior.add(new Archer());
         typesWarrior.add(new Viking());
         new MainFrame(typesWarrior).setVisible(true);

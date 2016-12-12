@@ -223,7 +223,7 @@ public class MainFrame extends JFrame {
     }
 
     private Squad getSelectedSquad() {
-        switch (selectSquad.getSelectedIndex()) {
+        switch (selectSquad.getSelectedIndex()) { //для двух вариантов использовать switch излишне. просто if-else же
             case 0:
                 return sq1;
             case 1:
@@ -260,7 +260,7 @@ public class MainFrame extends JFrame {
     private void outputCreatbleInfo() {
         DateHelper d = new DateHelper();
         strBResult.append("Список бойцов\n");
-        sq1.getSquad().forEach(sq -> strBResult.append(sq.toString() + "\n"));
+        sq1.getSquad().forEach(sq -> strBResult.append(sq.toString() + "\n")); //в этом месте и далее одна конкатенация заменяется stringBuilder'om, зато другие все так же порождают лишние объекты. все плюсы заменить на append.
         strBResult.append("\n");
         sq2.getSquad().forEach(sq -> strBResult.append(sq.toString() + "\n"));
         strBResult.append("\nСражение началось!\n");
@@ -270,7 +270,7 @@ public class MainFrame extends JFrame {
         strBResult.append("\nОбщее время поединка " + d.getFormattedDiff());
     }
 
-    public String battle(Squad ot1, Squad ot2, DateHelper d) {
+    public String battle(Squad ot1, Squad ot2, DateHelper d) { //для реализации логики сражения есть класс Battle
         int i = 0;
         String nameWinner = "";
         while (nameWinner.equals("")) {
@@ -284,7 +284,7 @@ public class MainFrame extends JFrame {
                 nameWinner = ot1.toString();
                 break;
             }
-            w1 = ot1.getRandomWarrior();
+            w1 = ot1.getRandomWarrior(); //2 раза одно и тоже. нужно вынести в отдельный метод
             w2 = ot2.getRandomWarrior();
             strBResult.append("\nБоец - " + w2.toString() + " атакует бойца\n       " + w1.toString());
             w1.takeDamage(w2.attack());

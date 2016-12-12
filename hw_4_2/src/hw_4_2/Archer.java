@@ -11,7 +11,7 @@ package hw_4_2;
  */
 public class Archer implements Warrior, Cloneable {
 
-    protected int health;
+    protected int health; //почему protected?
     protected int damage;
     protected String squadName;
     protected String warriorName;
