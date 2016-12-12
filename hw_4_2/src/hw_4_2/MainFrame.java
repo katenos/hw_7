@@ -43,7 +43,7 @@ public class MainFrame extends JFrame {
 
     private MainFrame.MyTextField nameSquard1;
     private MainFrame.MyTextField nameSquard2;
-    private JPanel panel;
+//    private JPanel panel;
     private JComboBox<String> selectSquad;
     private JComboBox<String> selectClassWarrior;
     private MyTextField nameWarrior;
@@ -57,6 +57,7 @@ public class MainFrame extends JFrame {
     private List<Warrior> typeWarrior;
     private Squad sq1;
     private Squad sq2;
+    private StringBuilder strBResult = new StringBuilder();
 
     public MainFrame(List<Warrior> typeWarrior) throws Exception {
         super("Битва");
@@ -64,7 +65,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(3);
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         setLayout(new GridBagLayout());
-        setPreferredSize(new Dimension(600, 590));
+        setPreferredSize(new Dimension(620, 600));
         initComponents();
     }
 
@@ -75,21 +76,14 @@ public class MainFrame extends JFrame {
         nameSquard2.setText("Отряд 2");
         sq1 = new Squad("Отряд 1");
         sq2 = new Squad("Отряд 2");
-        panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         selectSquad = new JComboBox(new String[]{"№1", "№2"});
         nameWarrior = new MyTextField();
         selectClassWarrior = new JComboBox(typesWarriorToString(typeWarrior).toArray());
         addWarrior = new JButton("Добавить");
-        resultArea = new JTextArea(10, 30);
+        resultArea = new JTextArea(10, 10);
         resultArea.setFont(new Font(null, Font.PLAIN, 14));
-        resultArea.setPreferredSize(new Dimension(300, 100));        
-        JScrollPane txtAreaScroll = new JScrollPane(resultArea);
-        txtAreaScroll.setViewportView(resultArea);
-//        txtAreaScroll.setAutoscrolls(true);
-//        resultArea.setMaximumSize(new Dimension(300, 100));
-//        JScrollPane scrollPane = new JScrollPane(resultArea);
-        txtAreaScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         start = new JButton("Старт");
         save = new JButton("Сохранить в файл");
         save.setEnabled(false);
@@ -142,18 +136,21 @@ public class MainFrame extends JFrame {
         add(new JLabel("Результаты битвы:"), gridConstraints);
         gridConstraints.gridy = 4;
         gridConstraints.gridwidth = 2;
+        gridConstraints.gridheight = 10;
         gridConstraints.weighty = 1;
         gridConstraints.weightx = 1;
         add(resultArea, gridConstraints);
-        gridConstraints.fill = GridBagConstraints.BOTH;
+        JScrollPane txtAreaScroll = new JScrollPane(resultArea);
+        txtAreaScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         add(txtAreaScroll, gridConstraints);
+        gridConstraints.gridheight = 1;
         gridConstraints.gridwidth = 1;
-        gridConstraints.gridy = 5;
+        gridConstraints.gridy = 15;
         gridConstraints.gridx = 1;
         add(start, gridConstraints);
-        gridConstraints.gridy = 6;
+        gridConstraints.gridy = 16;
         add(save, gridConstraints);
-        gridConstraints.gridy = 5;
+        gridConstraints.gridy = 15;
         gridConstraints.gridx = 0;
         add(message, gridConstraints);
         add(error, gridConstraints);
@@ -189,12 +186,15 @@ public class MainFrame extends JFrame {
         start.addActionListener(e -> {
             error.setText("");
             message.setText("");
+            sq1.rename(nameSquard1.getText());
+            sq2.rename(nameSquard2.getText());
             //изменение имени отряда у бойца, т.к. изначально при клонировании имя отряда не задано
             //можно было обойтись и без этого, но не хочется переписывать toString и вывод на экран результатов битвы            
             sq1.changeSquadNameOfWarrior();
             sq2.changeSquadNameOfWarrior();
             if (fieldsFill()) {
                 outputCreatbleInfo();
+                resultArea.setText(strBResult.toString());               
                 start.setEnabled(false);
                 save.setEnabled(true);
             }
@@ -204,10 +204,10 @@ public class MainFrame extends JFrame {
             message.setText("Сохранено");
             save.setEnabled(false);
         });
-
     }
 
     private class MyTextField extends JTextField {
+
         public MyTextField() {
             super(10);
             setFont(new Font(null, Font.PLAIN, 14));
@@ -259,25 +259,25 @@ public class MainFrame extends JFrame {
 
     private void outputCreatbleInfo() {
         DateHelper d = new DateHelper();
-        resultArea.append("Список бойцов\n");
-        sq1.getSquad().forEach(sq -> resultArea.append(sq.toString() + "\n"));
-        resultArea.append("\n");
-        sq2.getSquad().forEach(sq -> resultArea.append(sq.toString() + "\n"));
-        resultArea.append("\nСражение началось!\n");
-        resultArea.append(d.getFormattedStartDate());
+        strBResult.append("Список бойцов\n");
+        sq1.getSquad().forEach(sq -> strBResult.append(sq.toString() + "\n"));
+        strBResult.append("\n");
+        sq2.getSquad().forEach(sq -> strBResult.append(sq.toString() + "\n"));
+        strBResult.append("\nСражение началось!\n");
+        strBResult.append(d.getFormattedStartDate());
         String nameWinner = battle(sq1, sq2, d);
-        resultArea.append("\nПобедил " + nameWinner);
-        resultArea.append("\nОбщее время поединка " + d.getFormattedDiff());
+        strBResult.append("\nПобедил " + nameWinner);
+        strBResult.append("\nОбщее время поединка " + d.getFormattedDiff());
     }
 
     public String battle(Squad ot1, Squad ot2, DateHelper d) {
         int i = 0;
         String nameWinner = "";
         while (nameWinner.equals("")) {
-            resultArea.append("\nРаунд " + (++i));
+            strBResult.append("\nРаунд " + (++i));
             Warrior w1 = ot1.getRandomWarrior();
             Warrior w2 = ot2.getRandomWarrior();
-            resultArea.append("\nБоец - " + w1.toString() + " атакует бойца\n       " + w2.toString());
+            strBResult.append("\nБоец - " + w1.toString() + " атакует бойца\n       " + w2.toString());
             w2.takeDamage(w1.attack());
             d.skipTime();
             if (!ot2.hasAliveWarriors()) {
@@ -286,7 +286,7 @@ public class MainFrame extends JFrame {
             }
             w1 = ot1.getRandomWarrior();
             w2 = ot2.getRandomWarrior();
-            resultArea.append("\nБоец - " + w2.toString() + " атакует бойца\n       " + w1.toString());
+            strBResult.append("\nБоец - " + w2.toString() + " атакует бойца\n       " + w1.toString());
             w1.takeDamage(w2.attack());
             d.skipTime();
             if (!ot1.hasAliveWarriors()) {

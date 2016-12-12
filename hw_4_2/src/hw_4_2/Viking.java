@@ -51,7 +51,7 @@ public class Viking implements Warrior, Cloneable {
 
     @Override
     public String toString() {
-        String str = "Имя: " + this.warriorName + ", " + this.squadName + ", "
+        String str = "Викинг: имя " + this.warriorName + ", " + this.squadName + ", "
                 + "здоровье " + this.health + ", урон " + this.damage;
         return str;
     }
