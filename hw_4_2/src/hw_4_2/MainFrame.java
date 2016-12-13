@@ -213,13 +213,12 @@ public class MainFrame extends JFrame {
     }
 
     private Squad getSelectedSquad() {
-        switch (selectSquad.getSelectedIndex()) {
-            case 0:
-                return sq1;
-            case 1:
-                return sq2;
+        if(selectSquad.getSelectedIndex()==0){
+            return sq1;
         }
-        return null;
+        else{
+            return sq2;
+        }       
     }
 
     private Warrior getSelectedWarrior() {
