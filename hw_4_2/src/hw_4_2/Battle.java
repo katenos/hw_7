@@ -44,24 +44,18 @@ public class Battle {
     }
 
     private StringBuilder battle(Squad ot1, Squad ot2, DateHelper d) {
-        StringBuilder strBResult = new StringBuilder();
-        Warrior w1;
-        Warrior w2;
+        StringBuilder strBResult = new StringBuilder();        
         int i = 0;
         String nameWinner = "";
         while (nameWinner.equals("")) {
-            strBResult.append("\nРаунд " + (++i));
-            w1 = ot1.getRandomWarrior();
-            w2 = ot2.getRandomWarrior();
-            strBResult.append(attackRaund(w1, w2));
+            strBResult.append("\nРаунд " + (++i));            
+            strBResult.append(attackRound(ot1, ot2));
             d.skipTime();
             if (!ot2.hasAliveWarriors()) {
                 nameWinner = ot1.toString();
                 break;
-            }
-            w1 = ot1.getRandomWarrior();
-            w2 = ot2.getRandomWarrior();
-            strBResult.append(attackRaund(w2, w1));
+            }           
+            strBResult.append(attackRound(ot2, ot1));
             d.skipTime();
             if (!ot1.hasAliveWarriors()) {
                 nameWinner = ot2.toString();
@@ -73,7 +67,10 @@ public class Battle {
         return strBResult;
     }
 
-    private StringBuilder attackRaund(Warrior w1, Warrior w2) {
+    
+    private StringBuilder attackRound(Squad ot1, Squad ot2) {
+        Warrior w1 = ot1.getRandomWarrior();
+        Warrior w2 = ot2.getRandomWarrior();
         StringBuilder strBResult = new StringBuilder();
         strBResult.append("\nБоец - " + w1.toString() + " атакует бойца\n       " + w2.toString());
         w2.takeDamage(w1.attack());
