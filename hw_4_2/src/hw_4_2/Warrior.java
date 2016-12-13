@@ -9,19 +9,37 @@ package hw_4_2;
  *
  * @author kate_
  */
-public interface Warrior {
+public abstract class Warrior implements Cloneable{
 
-    int attack();
+    protected int health;
+    protected int damage;
+    protected String squadName;
+    protected String warriorName;
 
-    void takeDamage(int damage);
+    int attack() {
+        return this.damage;
+    }
 
-    boolean isAlive();
+    public void takeDamage(int damage) {
+        this.health -= damage;
+    }
 
-    void setSquadName(String name);
+    public boolean isAlive() {
+        return this.health > 0;
+    }
+
+    public void setSquadName(String name) {
+        this.squadName = name;
+    }
+
+    public void setName(String name) {
+        this.warriorName = name;
+    }
+
+    @Override
+    public Warrior clone() throws CloneNotSupportedException {       
+        return (Warrior) super.clone();
+    }
     
-    void setName(String name);
-    
-    String getTypeWarrior();
-    
-    Warrior clone() throws CloneNotSupportedException;
+    abstract String getTypeWarrior();
 }

@@ -5,20 +5,16 @@
  */
 package hw_4_2;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,9 +27,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.WindowConstants;
-import javax.swing.border.Border;
-import javax.swing.text.DefaultCaret;
 
 /**
  *
@@ -43,7 +36,6 @@ public class MainFrame extends JFrame {
 
     private MainFrame.MyTextField nameSquard1;
     private MainFrame.MyTextField nameSquard2;
-//    private JPanel panel;
     private JComboBox<String> selectSquad;
     private JComboBox<String> selectClassWarrior;
     private MyTextField nameWarrior;
@@ -56,8 +48,7 @@ public class MainFrame extends JFrame {
 
     private List<Warrior> typeWarrior;
     private Squad sq1;
-    private Squad sq2;
-    private StringBuilder strBResult = new StringBuilder();
+    private Squad sq2;    
 
     public MainFrame(List<Warrior> typeWarrior) throws Exception {
         super("Битва");
@@ -193,8 +184,8 @@ public class MainFrame extends JFrame {
             sq1.changeSquadNameOfWarrior();
             sq2.changeSquadNameOfWarrior();
             if (fieldsFill()) {
-                outputCreatbleInfo();
-                resultArea.setText(strBResult.toString());               
+                Battle battle=new Battle();                
+                resultArea.setText(battle.outputCreatbleInfo(sq1,sq2).toString());               
                 start.setEnabled(false);
                 save.setEnabled(true);
             }
@@ -207,7 +198,6 @@ public class MainFrame extends JFrame {
     }
 
     private class MyTextField extends JTextField {
-
         public MyTextField() {
             super(10);
             setFont(new Font(null, Font.PLAIN, 14));
@@ -255,45 +245,5 @@ public class MainFrame extends JFrame {
             error.setText("Во втором отряде нет бойцов!");
         }
         return result;
-    }
-
-    private void outputCreatbleInfo() {
-        DateHelper d = new DateHelper();
-        strBResult.append("Список бойцов\n");
-        sq1.getSquad().forEach(sq -> strBResult.append(sq.toString() + "\n"));
-        strBResult.append("\n");
-        sq2.getSquad().forEach(sq -> strBResult.append(sq.toString() + "\n"));
-        strBResult.append("\nСражение началось!\n");
-        strBResult.append(d.getFormattedStartDate());
-        String nameWinner = battle(sq1, sq2, d);
-        strBResult.append("\nПобедил " + nameWinner);
-        strBResult.append("\nОбщее время поединка " + d.getFormattedDiff());
-    }
-
-    public String battle(Squad ot1, Squad ot2, DateHelper d) {
-        int i = 0;
-        String nameWinner = "";
-        while (nameWinner.equals("")) {
-            strBResult.append("\nРаунд " + (++i));
-            Warrior w1 = ot1.getRandomWarrior();
-            Warrior w2 = ot2.getRandomWarrior();
-            strBResult.append("\nБоец - " + w1.toString() + " атакует бойца\n       " + w2.toString());
-            w2.takeDamage(w1.attack());
-            d.skipTime();
-            if (!ot2.hasAliveWarriors()) {
-                nameWinner = ot1.toString();
-                break;
-            }
-            w1 = ot1.getRandomWarrior();
-            w2 = ot2.getRandomWarrior();
-            strBResult.append("\nБоец - " + w2.toString() + " атакует бойца\n       " + w1.toString());
-            w1.takeDamage(w2.attack());
-            d.skipTime();
-            if (!ot1.hasAliveWarriors()) {
-                nameWinner = ot2.toString();
-                break;
-            }
-        }
-        return nameWinner;
     }
 }
