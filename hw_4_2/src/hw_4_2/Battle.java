@@ -34,9 +34,9 @@ public class Battle {
         StringBuilder strBResult = new StringBuilder();
         DateHelper d = new DateHelper();
         strBResult.append("Список бойцов\n");
-        sq1.getSquad().forEach(sq -> strBResult.append(sq.toString() + "\n"));
+        sq1.getSquad().forEach(sq -> strBResult.append(sq.toString()).append("\n"));
         strBResult.append("\n");
-        sq2.getSquad().forEach(sq -> strBResult.append(sq.toString() + "\n"));
+        sq2.getSquad().forEach(sq -> strBResult.append(sq.toString()).append("\n"));
         strBResult.append("\nСражение началось!\n");
         strBResult.append(d.getFormattedStartDate());
         strBResult.append(battle(sq1, sq2, d));
@@ -62,8 +62,8 @@ public class Battle {
                 break;
             }
         }
-        strBResult.append("\nПобедил " + nameWinner);
-        strBResult.append("\nОбщее время поединка " + d.getFormattedDiff());
+        strBResult.append("\nПобедил ").append(nameWinner);
+        strBResult.append("\nОбщее время поединка ").append(d.getFormattedDiff());
         return strBResult;
     }
 
@@ -72,7 +72,7 @@ public class Battle {
         Warrior w1 = ot1.getRandomWarrior();
         Warrior w2 = ot2.getRandomWarrior();
         StringBuilder strBResult = new StringBuilder();
-        strBResult.append("\nБоец - " + w1.toString() + " атакует бойца\n       " + w2.toString());
+        strBResult.append("\nБоец - ").append(w1.toString()).append(" атакует бойца\n       ").append(w2.toString());
         w2.takeDamage(w1.attack());
         return strBResult;
     }
